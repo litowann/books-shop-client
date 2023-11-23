@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { isEmpty } from 'lodash';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { allBooksSelector } from '../../selectors/booksSelectors';
+import { fetchAllBooksRequested } from '../../actions/books/actions';
 
 const App = () => {
-    const [data, setData] = useState({});
-
+    const allBooks = useSelector(state => allBooksSelector(state));
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/books/').then(response => response.json()).then(data => setData(data));
-    }, []);
-
-    if (isEmpty(data)) return <span>Loading...</span>
+        dispatch(fetchAllBooksRequested);
+    }, [dispatch]);
 
     return (
-        <div>
-            <ul>
-                {data?.map(book => (
-                    <li key={book.year + book.pages}>
-                        <p>{book.name}</p>
-                        <p>{book.author}</p>
-                        <p>{book.pages}</p>
-                        <p>{book.year}</p>
-                    </li>
-                ))}
-            </ul></div>
+        <div>Hello</div>
     )
 }
 
