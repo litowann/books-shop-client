@@ -8,7 +8,7 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchAllBooksRequested);
+        dispatch(fetchAllBooksRequested());
     }, [dispatch]);
 
     return (
